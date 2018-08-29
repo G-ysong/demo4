@@ -1,0 +1,55 @@
+{{extend '../_layouts/home.html'}}
+
+{{block 'title'}}{{'多人博客 - 首页'}}{{/block}}
+
+{{block 'body'}}
+<section class="container">
+  {{include '../_partials/settings-nav.html'}}
+  <div class="col-md-5">
+    <form method="post" action="/settings/profile">
+      <div class="form-group">
+        <label>账号</label>
+        <input type="text" class="form-control" name="email" readonly="readonly"  value="{{user.email}}">
+      </div>
+      <div class="form-group">
+        <label for="nickname">昵称</label>
+        <input type="text" class="form-control" name="nickname" id="nickname" placeholder="" value="{{user.nickname}}">
+      </div>
+      <div class="form-group">
+        <label for="bio">介绍</label>
+        <textarea style="resize: none" id="bio" name="bio" class="form-control" rows="3">{{user.bio}}</textarea>
+      </div>
+      <div class="form-group">
+        <label>性别</label>
+        <div>
+          <label class="radio-inline">
+            <input type="radio" name="gender" value="1"{{user.gender===1 ? " checked":""}} > 男
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="gender" value="0"{{user.gender===0 ? " checked":""}} > 女
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="gender" value="-1"{{user.gender===-1 ? " checked":""}} > 保密
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="birthday">生日</label>
+        <input type="date" class="form-control" name="birthday" id="birthday" placeholder="" value="{{user.birthday}}">
+      </div>
+      <button type="submit" class="btn btn-success">保存</button>
+    </form>
+  </div>
+  <div class="col-md-2 profile-avatar">
+    <dl>
+      <dt>头像设置</dt>
+      <dd>
+        <img class="avatar" width="150" height="150" src="../public/img/avatar-max-img.png" alt="">
+        <div>
+          <button class="btn btn-default" href="">Upload new picture</button>
+        </div>
+      </dd>
+    </dl>
+  </div>
+</section>
+{{/block}}
